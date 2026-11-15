@@ -1,0 +1,36 @@
+{
+  "actorSpecification": 1,
+  "name": "eu-tender-finder",
+  "title": "EU Public Tender Finder (TED)",
+  "description": "Find EU and Nordic public tenders from TED, the official EU procurement journal. Filter by keyword, country, CPV code, value and deadline. Clean JSON rows with buyer, deadline, value and links. Daily monitoring mode returns only new tenders.",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "storages": {
+    "dataset": {
+      "actorSpecification": 1,
+      "views": {
+        "overview": {
+          "title": "Tenders",
+          "transformation": {
+            "fields": ["title", "buyerName", "buyerCountry", "submissionDeadline", "estimatedValue", "currency", "publicationDate", "tedUrl"]
+          },
+          "display": {
+            "component": "table",
+            "properties": {
+              "title": {"label": "Title", "format": "text"},
+              "buyerName": {"label": "Buyer", "format": "text"},
+              "buyerCountry": {"label": "Country", "format": "text"},
+              "submissionDeadline": {"label": "Deadline", "format": "text"},
+              "estimatedValue": {"label": "Est. value", "format": "number"},
+              "currency": {"label": "Currency", "format": "text"},
+              "publicationDate": {"label": "Published", "format": "text"},
+              "tedUrl": {"label": "TED link", "format": "link"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
