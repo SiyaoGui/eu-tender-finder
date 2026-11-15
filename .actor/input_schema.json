@@ -1,0 +1,84 @@
+{
+  "title": "EU Public Tender Finder (TED)",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "keywords": {
+      "title": "Keywords",
+      "type": "array",
+      "description": "Words or phrases to search in the full notice text, in any EU language. A notice matches if it contains any of them. Leave empty to get everything that matches the other filters.",
+      "editor": "stringList",
+      "prefill": ["software"]
+    },
+    "countries": {
+      "title": "Buyer countries",
+      "type": "array",
+      "description": "Countries of the buying organisation, as 2-letter (DK) or 3-letter (DNK) codes. Leave empty for all of Europe.",
+      "editor": "stringList",
+      "prefill": ["DK", "SE", "NO", "FI"]
+    },
+    "cpvCodes": {
+      "title": "CPV codes",
+      "type": "array",
+      "description": "Common Procurement Vocabulary codes. Short codes match whole families, for example 72 = IT services, 45 = construction work, 90910000 = cleaning services, 33 = medical equipment.",
+      "editor": "stringList"
+    },
+    "noticeTypes": {
+      "title": "Notice types",
+      "type": "string",
+      "description": "Open calls are tenders you can still bid on. Prior information notices announce upcoming tenders. Awards show who won past tenders (useful for competitor research).",
+      "editor": "select",
+      "enum": ["open_calls", "prior_information", "awards", "all"],
+      "enumTitles": ["Open calls for tender", "Prior information (upcoming tenders)", "Contract awards (who won)", "All notice types"],
+      "default": "open_calls"
+    },
+    "publishedWithinDays": {
+      "title": "Published within the last N days",
+      "type": "integer",
+      "description": "Only notices published in this many days, including today. TED publishes on weekdays.",
+      "minimum": 1,
+      "maximum": 3650,
+      "default": 7
+    },
+    "onlyOpenDeadline": {
+      "title": "Only tenders still open for bids",
+      "type": "boolean",
+      "description": "For open calls, skip notices whose submission deadline has already passed.",
+      "default": true
+    },
+    "minEstimatedValue": {
+      "title": "Minimum estimated value",
+      "type": "integer",
+      "description": "Skip tenders with a smaller estimated value (in the notice's own currency). Many notices do not state a value; those are skipped when this is set.",
+      "minimum": 0
+    },
+    "preferredLanguages": {
+      "title": "Preferred text languages",
+      "type": "array",
+      "description": "Language codes for titles and descriptions, in order of preference (en, da, de, fr, sv, ...). Falls back to English, then to whatever language the buyer used.",
+      "editor": "stringList",
+      "default": ["en"]
+    },
+    "onlyNewSinceLastRun": {
+      "title": "Only new notices since the last run (monitoring)",
+      "type": "boolean",
+      "description": "Remember which notices were already delivered and return only new ones. Use with a schedule to get a daily tender alert. You are only charged for new notices.",
+      "default": false
+    },
+    "monitorName": {
+      "title": "Monitor name",
+      "type": "string",
+      "description": "Keeps separate memories for different saved searches when monitoring is on.",
+      "default": "default",
+      "editor": "textfield"
+    },
+    "maxResults": {
+      "title": "Maximum results",
+      "type": "integer",
+      "description": "Stop after this many notices.",
+      "minimum": 1,
+      "maximum": 10000,
+      "default": 100
+    }
+  }
+}
